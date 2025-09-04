@@ -1,4 +1,6 @@
-﻿namespace ProdClient.Exceptions.ExceptionBase
+﻿using System.Net;
+
+namespace ProdClient.Exceptions.ExceptionBase
 {
     public abstract class ProdClientException : SystemException
     {
@@ -7,5 +9,6 @@
         }
 
         public abstract List<string> GetErrors();
+        public abstract HttpStatusCode GetHttpStatusCode();
     }
 }
