@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProdClient.Communication.Requests;
 using ProdClient.Communication.Responses;
-using ProdClient.Exceptions.ExceptionBase;
 using ProdClient_API.UseCase.Clients.Register;
 
 namespace ProdClient_API.Controllers
@@ -15,25 +14,11 @@ namespace ProdClient_API.Controllers
         [ProducesResponseType(typeof(ResponseErrorMessagesJson), StatusCodes.Status400BadRequest)]
         public IActionResult Register([FromBody]RequestClientJson request)
         {
-            try
-            {
                 var useCase = new RegisterClientUseCase();
 
                 var response = useCase.Execute(request);
 
                 return Created(string.Empty, response);
-            }
-            catch (ProdClientException ex) 
-            {
-                var errors = ex.GetErrors();
-
-                return BadRequest(new ResponseErrorMessagesJson(errors));
-            }
-            catch 
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new ResponseErrorMessagesJson("erro desconhecido"));
-            }
-
         }
 
         [HttpPut]
