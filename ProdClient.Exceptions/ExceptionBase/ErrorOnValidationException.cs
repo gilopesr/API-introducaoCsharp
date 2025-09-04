@@ -1,6 +1,4 @@
-﻿using System.Net;
-
-namespace ProdClient.Exceptions.ExceptionBase
+﻿namespace ProdClient.Exceptions.ExceptionBase
 {
     public class ErrorOnValidationException : ProdClientException
     {
@@ -11,8 +9,5 @@ namespace ProdClient.Exceptions.ExceptionBase
         }
 
         public override List<string> GetErrors() => _errors;
-
-        public override HttpStatusCode GetHttpStatusCode() => HttpStatusCode.BadRequest;
-        
     }
 }
