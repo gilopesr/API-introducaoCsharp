@@ -3,12 +3,13 @@ using ProdClient.Communication.Responses;
 using ProdClient.Exceptions.ExceptionBase;
 using ProdClient_API.Entities;
 using ProdClient_API.Infraestructure;
+using ProdClient_API.UseCase.Clients.SharedValidator;
 
 namespace ProdClient_API.UseCase.Clients.Register
 {
     public class RegisterClientUseCase
     {
-        public ResponseClientJson Execute(RequestClientJson request)
+        public ResponseShortClientJson Execute(RequestClientJson request)
         {
             Validate(request);
 
@@ -24,7 +25,7 @@ namespace ProdClient_API.UseCase.Clients.Register
             dbContext.Clients.Add(entity);
             dbContext.SaveChanges();
 
-            return new ResponseClientJson
+            return new ResponseShortClientJson
             {
                 id = entity.Id,
                 Name = entity.Name,
@@ -33,7 +34,7 @@ namespace ProdClient_API.UseCase.Clients.Register
 
         private void Validate(RequestClientJson request)
         {
-            var validator = new RegisterClientvalidator();
+            var validator = new RequestClientValidator();
 
             var result = validator.Validate(request);
 
